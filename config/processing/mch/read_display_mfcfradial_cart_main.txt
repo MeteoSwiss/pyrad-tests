@@ -1,0 +1,48 @@
+# MAIN CONFIG FILE
+# Example of plotting MF ODIM data
+
+# IMPORTANT: Adapt the paths to the actual location of your data and config files
+
+# Name of this configuration:
+# Will be used in product generation save path
+name STRING read_display_mfcfradial_cart
+
+# ---------------------------------------------------------
+#  Raw data pathes
+# ---------------------------------------------------------
+
+# Base path of the raw data.
+# Note: Must have a trailing '/'
+datapath STRING ${PYRAD_TESTS_PATH}/input_data/read_display_mfcfradial_cart/
+path_convention STRING ODIM
+
+# NWP path
+cosmopath STRING ${PYRAD_TESTS_PATH}/input_data/read_display_mfcfradial_cart/
+
+# Loading of saved datasets
+loadbasepath STRING STRING HOME/pyrad-examples/pyrad_products_test/
+loadname STRING read_display_mfcfradial_cart
+
+
+# --------------------------------------------
+# Output data
+# -----------------------------------------------
+saveimgbasepath STRING ${PYRAD_TESTS_PATH}/pyrad_products_test/
+
+# Output image format can be any accepted by Matplotlib
+# More than one output formats can be set
+imgformat STRARR 1
+    png
+
+# --------------------------------------------------------
+# configuration files pathes
+# --------------------------------------------------------
+
+# Base path of configuration files
+configpath STRING ${PYRAD_TESTS_PATH}/config/
+
+# Configuration of the radar location and approach direction
+locationConfigFile STRING ${PYRAD_TESTS_PATH}/config/processing/mch/read_display_mfcfradial_cart_loc.txt
+
+# Configuration of the product generation
+productConfigFile STRING ${PYRAD_TESTS_PATH}/config/processing/mch/read_display_mfcfradial_cart_prod.txt

@@ -1,0 +1,11 @@
+# This file allows to specify the time stan for every test
+test_name,t0,t1
+read_display_cfradialpyrad,20210114000000,20210114000000
+read_display_nexrad,20130717195000,20130717195000
+read_display_rainbow,20191021082409,20191021082409
+read_process_hydro_cfradial,20220628072500,20220628072500
+read_display_cpc,20170801170000,20170801170000
+read_display_mfcfradial,20210114234500,20210114234500
+read_display_mfcfradial_cart,20210114000000,20210114000000
+read_process_rainbow_psr_sunscan,20230429115759,20230429115759 
+read_display_metranet_cartesian,20170801170000,20170801170000
