@@ -36,7 +36,8 @@ def compare_images(file1_path, file2_path, precision = 1E-6):
     # Open the NetCDF files
     im1 = imageio.imread(file1_path)
     im2 = imageio.imread(file2_path)
-
+    print(np.nansum(im1))
+    print(np.nansum(im2))
     are_equal = np.allclose(im1, im2, atol=precision)
 
     return are_equal
