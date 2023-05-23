@@ -7,7 +7,7 @@ Set of config files and reference outputs used for the CI testing of pyrad
 2. Place your input data in pyrad-tests/input_data/<name_of_your_test>
 3. Create your *loc*, *main* and *prod* config files under *pyrad-tests/config/processing/base/* if you use the standard Py-ART version or under *pyrad-tests/config/processing/mch/* if you use the MeteoSwiss version. Make sure to use the respect the following rules:
     * Main config filename must be <name_of_your_test>_main.txt
-    * The *saveimgbasepath* parameter in the main config file must be <name_of_your_test>
+    * The *name* parameter in the main config file must be <name_of_your_test>
     * The main directory of the pyrad-tests repository must be indicated with ${PYRAD_TESTS_PATH}, for example *datapath STRING ${PYRAD_TESTS_PATH}/input_data/read_display_nexrad/KATX/*
     * Make sure that the path to the data as defined in your config files agrees with where you placed them at step 2.
     * Make sure that the output path is set to *saveimgbasepath STRING ${PYRAD_TESTS_PATH}/pyrad_products_test/*
