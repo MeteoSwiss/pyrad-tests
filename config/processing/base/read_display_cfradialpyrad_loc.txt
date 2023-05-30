@@ -21,7 +21,7 @@ ppiImageConfig STRUCT 6
 
 
 # Image config
-rhiImageConfig STRUCT 6
+xsecImageConfig STRUCT 6
    xsize      FLOAT   9.    # image size [inches]
    ysize      FLOAT   7.     # image size [inches]
    xmin       FLOAT  0.0   # Min distance on horizontal axis [km]
