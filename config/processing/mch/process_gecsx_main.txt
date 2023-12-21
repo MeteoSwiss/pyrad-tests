@@ -1,0 +1,38 @@
+# Name of this configuration:
+# Will be used in product generation save path
+name STRING process_gecsx
+
+# ---------------------------------------------------------
+#  Raw data pathes
+# ---------------------------------------------------------
+
+# Not needed here
+
+# ------------------------------------------------------------
+# Auxiliary data pathes
+# ------------------------------------------------------------
+# Base path for dem data
+dempath STRING ${PYRAD_TESTS_PATH}/input_data/process_gecsx/
+
+# --------------------------------------------
+# Output data
+# --------------------------------------------
+saveimgbasepath STRING ${PYRAD_TESTS_PATH}/pyrad_products_test/
+# Supported formats: eps, jpeg, jpg, pdf, pgf, png, ps, raw, rgba, svg, svgz, tif, tiff
+imgformat STRING png
+
+# --------------------------------------------------------
+# configuration files pathes
+# --------------------------------------------------------
+
+# Base path of configuration files
+configpath STRING ${PYRAD_TESTS_PATH}/config/
+
+# Configuration of the radar location and approach direction
+locationConfigFile STRING ${PYRAD_TESTS_PATH}/config/processing/mch/process_gecsx_loc.txt
+
+# Configuration of the product generation
+productConfigFile STRING ${PYRAD_TESTS_PATH}/config/processing/mch/process_gecsx_prod.txt
+
+
+
