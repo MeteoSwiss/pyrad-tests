@@ -1,0 +1,13 @@
+# Weather radar timeseries data file
+# Project: MALSplus
+# Data/Unit : transmitted_signal_power_h [kW]
+# Start : 2023-04-29 11:57:59 UTC
+# Header lines with comments are preceded by '#'
+# Statistics of a region in a volume.
+#   Name      : transmitted_signal_power_h
+#   Azimuth   : 191.0495 - 198.8498 [deg]
+#   Elevation : 55.2 - 58.8 [deg]
+#   Range     : 0.0 - 50.0 [m]
+#
+# Date [YYYY-MM-DD hh:mm:ss], Mean, Median, Stddev, Nsamples, Nvalid
+2023-04-29 11:57:59, 73.6904, nan, 0.1460, 1106.0000, 1106.0000

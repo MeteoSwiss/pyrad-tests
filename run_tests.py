@@ -7,7 +7,7 @@ import shutil
 import datetime
 from netCDF4 import Dataset
 import numpy as np
-from pyrad.flow import main
+from pyrad.flow import main, main_gecsx
 
 import imageio
 import filecmp
@@ -132,16 +132,18 @@ def run_tests(category):
         # Remove test dir if exists
         if os.path.exists(dir_test):
             shutil.rmtree(dir_test)
-        t0 = time_ref[time_ref['test_name'] == test_bname]['t0']
-        t1 = time_ref[time_ref['test_name'] == test_bname]['t1']
-        starttime = datetime.datetime.strptime(str(int(t0)), '%Y%m%d%H%M%S')
-        endtime = datetime.datetime.strptime(str(int(t1)), '%Y%m%d%H%M%S')
-        main(test, starttime=starttime, endtime=endtime)
-
+        if 'gecsx' in test:
+            main_gecsx(test, gather_plots=False)
+        else:
+            t0 = time_ref[time_ref['test_name'] == test_bname]['t0']
+            t1 = time_ref[time_ref['test_name'] == test_bname]['t1']
+            starttime = datetime.datetime.strptime(str(int(t0)), '%Y%m%d%H%M%S')
+            endtime = datetime.datetime.strptime(str(int(t1)), '%Y%m%d%H%M%S')
+            main(test, starttime=starttime, endtime=endtime)            
+            
         are_identical = compare_directories(dir_test,
                                             dir_ref)
         assert are_identical
-
 
 def test_base():
     run_tests('base')
