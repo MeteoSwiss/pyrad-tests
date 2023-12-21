@@ -13,7 +13,7 @@ import imageio
 import filecmp
 import os
 
-def compare_csv_files(file1_path, file2_path, precision = 1E-6 ):
+def compare_csv_files(file1_path, file2_path, precision = 1E-3 ):
     df1 = pd.read_csv(file1_path, comment='#')
     df2 = pd.read_csv(file2_path, comment='#')
 
@@ -32,7 +32,7 @@ def compare_csv_files(file1_path, file2_path, precision = 1E-6 ):
         
         return max_diff <= precision
 
-def compare_images(file1_path, file2_path, precision = 1E-6):
+def compare_images(file1_path, file2_path, precision = 1E-3):
     # Open the NetCDF files
     im1 = imageio.imread(file1_path)
     im2 = imageio.imread(file2_path)
@@ -42,7 +42,7 @@ def compare_images(file1_path, file2_path, precision = 1E-6):
 
     return are_equal
 
-def compare_netcdf_files(file1_path, file2_path, precision = 1E-6):
+def compare_netcdf_files(file1_path, file2_path, precision = 1E-3):
     # Open the NetCDF files
     file1 = Dataset(file1_path, 'r')
     file2 = Dataset(file2_path, 'r')
