@@ -1,0 +1,50 @@
+#
+# main config file: QVP examples
+#
+
+# IMPORTANT: Adapt the paths to the actual location of your data and config files
+
+# call example:
+# main_process_data.py mf_odim_coll_qvp.txt --starttime 20200516200000 --endtime 20200516220000 --cfgpath ./
+
+# Name of this configuration:
+# Will be used in product generation save path
+name STRING process_qvp
+
+# ---------------------------------------------------------
+#  Raw data pathes
+# ---------------------------------------------------------
+
+# Base path of the raw data.
+# Note: Must have a trailing '/'
+datapath STRING ${PYRAD_TESTS_PATH}/input_data/process_qvp/
+path_convention STRING ODIM
+
+# Loading of saved datasets
+loadbasepath STRING ${PYRAD_TESTS_PATH}/pyrad_products_test/
+loadname STRING process_qvp
+
+
+# --------------------------------------------
+# Output data
+# -----------------------------------------------
+saveimgbasepath STRING ${PYRAD_TESTS_PATH}/pyrad_products_test/
+
+# Output image format can be any accepted by Matplotlib
+# More than one output formats can be set
+imgformat STRARR 1
+    png
+
+# --------------------------------------------------------
+# configuration files pathes
+# --------------------------------------------------------
+
+
+# Base path of configuration files
+configpath STRING ${PYRAD_TESTS_PATH}/config/
+
+# Configuration of the radar location and approach direction
+locationConfigFile STRING ${PYRAD_TESTS_PATH}/config/processing/mch/process_qvp_loc.txt
+
+# Configuration of the product generation
+productConfigFile STRING ${PYRAD_TESTS_PATH}/config/processing/mch/process_qvp_prod.txt

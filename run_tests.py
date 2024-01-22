@@ -36,8 +36,6 @@ def compare_images(file1_path, file2_path, precision = 1E-3):
     # Open the NetCDF files
     im1 = imageio.imread(file1_path)
     im2 = imageio.imread(file2_path)
-    print(np.nansum(im1))
-    print(np.nansum(im2))
     are_equal = np.allclose(im1, im2, atol=precision)
 
     return are_equal
@@ -74,6 +72,7 @@ def compare_directories(dir_a, dir_b):
     dir_comparison = filecmp.dircmp(dir_a, dir_b)
 
     if dir_comparison.left_only or dir_comparison.right_only:
+        print(f'Dir {dir_a} and {dir_b} do not contain the same files')
         return False
 
     for common_dir in dir_comparison.common_dirs:
