@@ -51,8 +51,8 @@ def compare_netcdf_files(file1_path, file2_path, precision = 1E-3):
 
     for var_name in var_names:
         # Get the variable arrays from the files
-        var1 = np.array(file1.variables[var_name][:])
-        var2 = np.array(file2.variables[var_name][:])
+        var1 = file1.variables[var_name][:].filled(0)
+        var2 = file2.variables[var_name][:].filled(0)
 
         # Compare the arrays within the specified precision
         try:
@@ -61,6 +61,7 @@ def compare_netcdf_files(file1_path, file2_path, precision = 1E-3):
             are_equal = np.all(var1 == var2)
 
         if not are_equal:
+            print(f'Variable {var_name} not equal in {file2_path}!')
             return are_equal
     
     # Close the NetCDF files
