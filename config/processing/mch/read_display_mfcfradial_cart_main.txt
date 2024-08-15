@@ -17,7 +17,7 @@ datapath STRING ${PYRAD_TESTS_PATH}/input_data/read_display_mfcfradial_cart/
 path_convention STRING ODIM
 
 # NWP path
-cosmopath STRING ${PYRAD_TESTS_PATH}/input_data/read_display_mfcfradial_cart/
+iconpath STRING ${PYRAD_TESTS_PATH}/input_data/read_display_mfcfradial_cart/
 
 # Loading of saved datasets
 loadbasepath STRING STRING HOME/pyrad-examples/pyrad_products_test/
