@@ -31,12 +31,6 @@ ScanList STRARR 5
 # Repetition time of the scans [min]
 ScanPeriod INT 5
 
-# Frequency of cosmo run [h]
-CosmoRunFreq INT 3
-
-# hours forecasted in cosmo run [h]
-CosmoForecasted INT 7
-
 # radar constant
 radconsth FLOAT 71.67
 radconstv FLOAT 72.27

@@ -23,6 +23,18 @@ ppiImageConfig STRUCT 6
    ymin       FLOAT -100.0   # Min distance on vertical axis [km]
    ymax       FLOAT  100.0   # Max distance on vertical axis [km]
 
+path_convention STRING ODIM
+
+DataTypeIDInFiles STRUCT 8
+    dBuZ STRING TH
+    ZDR STRING ZDR
+    RhoHV STRING RHOHV
+    uPhiDP STRING PHIDP
+    KDP STRING KDP
+    V STRING VRAD
+    W STRING WIDTH
+    sigma_zh STRING SIGMA
+
 
 # Image config
 rhiImageConfig STRUCT 6

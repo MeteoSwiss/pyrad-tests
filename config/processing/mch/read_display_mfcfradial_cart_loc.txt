@@ -15,10 +15,22 @@ ScanList STRARR 1
 ScanPeriod INT 5
 
 # Frequency of NWP run [h]
-CosmoRunFreq INT 12
+IconRunFreq INT 12
 
 # hours forecasted in NWP run [h]
-CosmoForecasted INT 24
+IconForecasted INT 24
+
+path_convention STRING ODIM
+
+DataTypeIDInFiles STRUCT 8
+    dBuZ STRING TH
+    ZDR STRING ZDR
+    RhoHV STRING RHOHV
+    uPhiDP STRING PHIDP
+    KDP STRING KDP
+    V STRING VRADH
+    W STRING WIDTH
+    sigma_zh STRING SIGMA
 
 # Image config
 ppiImageConfig STRUCT 6

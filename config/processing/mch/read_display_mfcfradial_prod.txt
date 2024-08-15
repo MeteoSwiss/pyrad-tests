@@ -15,7 +15,7 @@ dataSetList STRARR 4
 # ============================================================================
 dBuZ STRUCT 3
     type STRING RAW
-    datatype STRING MFCFRADIAL:dBuZ,D{%Y-%m-%d}-F{%Y%m%d%H%M}
+    datatype STRING CFRADIAL:dBuZ,D{%Y-%m-%d}-F{%Y%m%d%H%M}
     products STRUCT 2
         PPI_EL00 STRUCT 3
             type STRING PPI_IMAGE
@@ -28,7 +28,7 @@ dBuZ STRUCT 3
 
 V STRUCT 3
     type STRING RAW
-    datatype STRING MFCFRADIAL:V,D{%Y-%m-%d}-F{%Y%m%d%H%M}
+    datatype STRING CFRADIAL:V,D{%Y-%m-%d}-F{%Y%m%d%H%M}
     products STRUCT 2
         PPI_EL00 STRUCT 3
             type STRING PPI_IMAGE
@@ -41,7 +41,7 @@ V STRUCT 3
 
 sigma STRUCT 3
     type STRING RAW
-    datatype STRING MFCFRADIAL:sigma_zh,D{%Y-%m-%d}-F{%Y%m%d%H%M}
+    datatype STRING CFRADIAL:sigma_zh,D{%Y-%m-%d}-F{%Y%m%d%H%M}
     products STRUCT 2
         PPI_EL00 STRUCT 3
             type STRING PPI_IMAGE
@@ -60,7 +60,7 @@ sigma STRUCT 3
 SAVEVOL STRUCT 3
     type STRING NCVOL
     datatype STRARR 1
-        MFCFRADIAL:dBuZ,D{%Y-%m-%d}-F{%Y%m%d%H%M} # Arbitrary moment
+        CFRADIAL:dBuZ,D{%Y-%m-%d}-F{%Y%m%d%H%M} # Arbitrary moment
     products STRUCT 1
         NC STRUCT 2
             type  STRING SAVEALL
