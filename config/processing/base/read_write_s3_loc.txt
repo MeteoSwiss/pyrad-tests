@@ -1,0 +1,11 @@
+#
+# loc config file
+#
+
+# Names of the radar scans
+ScanList STRARR 1
+    MonteLema_20240522  # masterscan: first scan of a volume
+
+# Repetition time of the scans [min]
+ScanPeriod INT 5
+

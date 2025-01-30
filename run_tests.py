@@ -8,10 +8,11 @@ import datetime
 from netCDF4 import Dataset
 import numpy as np
 from pyrad.flow import main, main_gecsx
-
+from pyrad.io.config import read_config
 import imageio
 import filecmp
 import os
+import boto3
 
 def compare_csv_files(file1_path, file2_path, precision = 1E-3 ):
     df1 = pd.read_csv(file1_path, comment='#')
@@ -103,6 +104,72 @@ def compare_directories(dir_a, dir_b):
 
     return True
 
+def compare_s3_local(local_dir: str, s3_cfg: dict, size_tolerance=0.05) -> bool:
+    """
+    Compare the content of a local directory and an S3 bucket.
+
+    Args:
+        local_dir (str): Path to the local directory.
+        s3_cfg (dict): S3 configuration with keys "bucket", "endpoint", and "path".
+        size_tolerance (float): Allowed relative difference in file size (default 5%).
+
+    Returns:
+        True if the content is the same, False otherwise
+    """
+    mismatches = []
+
+    # Extract S3 configuration details
+    bucket = s3_cfg["bucket"]
+    endpoint = s3_cfg["endpoint"]
+    s3_path = s3_cfg["path"].strip("/")
+
+    aws_key = os.environ["S3_KEY_WRITE"]
+    aws_secret = os.environ["S3_SECRET_WRITE"]
+
+    s3_client_config = {
+        "aws_access_key_id": aws_key,
+        "endpoint_url": endpoint,
+        "aws_secret_access_key": aws_secret,
+    }
+    
+    # Initialize S3 client
+    s3_client = boto3.client("s3", **s3_client_config, verify=False)
+    
+    # List objects in the S3 path
+    s3_objects = s3_client.list_objects_v2(Bucket=bucket, Prefix=s3_path)
+    if "Contents" not in s3_objects:
+        print("No files found in the specified S3 path.")
+        return []
+
+    # Build a dictionary of S3 files and their sizes
+    s3_files = {
+        obj["Key"].replace(f"{s3_path}/", ""): obj["Size"]
+        for obj in s3_objects["Contents"]
+        if not obj["Key"].endswith("/")
+    }
+    # Walk through the local directory
+    for root, _, files in os.walk(local_dir):
+        for file_name in files:
+            local_file_path = os.path.join(root, file_name)
+            relative_path = os.path.relpath(local_file_path, local_dir)
+
+            # Skip if not present in S3
+            if relative_path not in s3_files:
+                mismatches.append(f"Missing in S3: {relative_path}")
+                continue
+
+            # Compare file sizes
+            local_size = os.path.getsize(local_file_path)
+            s3_size = s3_files[relative_path]
+            size_diff = abs(local_size - s3_size) / max(local_size, s3_size)
+
+            if size_diff > size_tolerance:
+                mismatches.append(
+                    f"Size mismatch for {relative_path}: local={local_size} bytes, s3={s3_size} bytes"
+                )
+    return ~len(mismatches)
+
+
 def run_tests(category):
     # Validate category value
     if category != "base" and category != "mch":
@@ -144,6 +211,17 @@ def run_tests(category):
         are_identical = compare_directories(dir_test,
                                             dir_ref)
         assert are_identical
+        
+        if "s3" in test:
+            # Check content of S3 so it matches reference
+            cfg = read_config(test)
+            cfg_s3 = {"bucket": cfg["s3BucketWrite"],
+                      "endpoint": cfg["s3EndpointWrite"],
+                      "path": cfg.get("s3PathWrite", "") + '/' + cfg["name"]}
+            are_identical = compare_s3_local(dir_ref,
+                                            cfg_s3)
+            
+            assert are_identical
 
 def test_base():
     run_tests('base')

@@ -1,0 +1,53 @@
+# MAIN CONFIG FILE
+# Example of reading an plotting Rainbow volume scan files
+
+# IMPORTANT: Adapt the paths to the actual location of your data and config files
+
+# call example:
+# If imported from source:
+# cd $HOME/pyrad/src/pyrad_proc/scripts/
+# python main_process_data.py rainbow_vol.txt --starttime 20191021082000 --endtime 20191021082500 --cfgpath ${PYRAD_TESTS_PATH}/config/processing/
+#
+# If used as a software package:
+# main_process_data.py rainbow_vol.txt --starttime 20191021082000 --endtime 20191021082500 --cfgpath ${PYRAD_TESTS_PATH}/config/processing/
+
+
+# Name of this configuration:
+# Will be used in product generation save path
+name STRING read_write_s3
+path_convention STRING ODIM
+
+# --------------------------------------------
+# Output data
+# -----------------------------------------------
+saveimgbasepath STRING ${PYRAD_TESTS_PATH}/pyrad_products_test/
+
+# Output image format can be any accepted by Matplotlib
+# More than one output formats can be set
+imgformat STRARR 1
+    png
+
+# --------------------------------------------------------
+# S3 configuration
+# --------------------------------------------------------
+s3EndpointRead STRING https://eu-central-1.linodeobjects.com/
+s3BucketRead STRING pyrad-s3-tests
+s3PathRead STRING Cband
+
+s3EndpointWrite STRING https://eu-central-1.linodeobjects.com/
+s3BucketWrite STRING pyrad-s3-tests
+s3PathWrite STRING Output
+
+# --------------------------------------------------------
+# configuration files pathes
+# --------------------------------------------------------
+
+# Base path of configuration files
+configpath STRING ${PYRAD_TESTS_PATH}/config/
+
+# Configuration of the radar location and approach direction
+locationConfigFile STRING ${PYRAD_TESTS_PATH}/config/processing/base/read_write_s3_loc.txt
+
+# Configuration of the product generation
+productConfigFile STRING ${PYRAD_TESTS_PATH}/config/processing/base/read_write_s3_prod.txt
+
