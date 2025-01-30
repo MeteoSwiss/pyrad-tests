@@ -1,0 +1,13 @@
+# List of datasets to generate.
+# The detailed specification of each dataset is given below.
+dataSetList STRARR 1
+   l0:reflectivity
+ 
+reflectivity STRUCT 3
+    type     STRING RAW
+    datatype STRARR 1
+        CFRADIAL:dBZ,D{}-F{%Y%m%d%H%M}
+    products STRUCT 1
+        SAVEVOL STRUCT 2
+            voltype STRING dBZ
+            type  STRING SAVEVOL
