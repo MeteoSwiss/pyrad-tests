@@ -4,10 +4,9 @@
 
 # List of datasets to generate.
 # The detailed specification of each dataset is given below.
-dataSetList STRARR 9
+dataSetList STRARR 8
     l0:ZH
     l0:ZH_grid
-    l0:MAX_echo
     l0:echoID
     l1:echoFilter
     l2:SNRFilter
@@ -57,32 +56,6 @@ ZH_grid STRUCT 5
          voltype STRING dBZ
          level INT 1
 
-MAX_echo STRUCT 7
-   type     STRING GRID_STATS
-   datatype STRING CFRADIAL:dBZ
-   wfunc STRING GRID
-   statistic STRING max
-   weighted INT 0
-   gridConfig STRUCT 9
-      xmin FLOAT -500.
-      xmax FLOAT 50.
-      ymin FLOAT -500.
-      ymax FLOAT 50.
-      zmin FLOAT 0.
-      zmax FLOAT 12000.
-      hres FLOAT 4000.
-      vres FLOAT 12000.
-      altorig FLOAT 0.
-   products STRUCT 2
-      LAT STRUCT 4
-         type STRING LATITUDE_SLICE
-         voltype STRING dBZ
-         lat FLOAT 46.04
-         lon FLOAT 8.83
-      SURFACE STRUCT 3
-         type  STRING SURFACE_IMAGE
-         voltype STRING dBZ
-         level INT 0
 
 # ==========================================================================================
 #                 secondary moments products

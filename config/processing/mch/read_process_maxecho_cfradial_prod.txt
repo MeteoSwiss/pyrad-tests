@@ -1,0 +1,29 @@
+#
+# Product generation configuration
+#
+
+# List of datasets to generate.
+# The detailed specification of each dataset is given below.
+dataSetList STRARR 1
+    l0:MAX_echo
+
+MAX_echo STRUCT 7
+   type     STRING GRID_STATS
+   datatype STRING CFRADIAL:dBZ
+   wfunc STRING GRID
+   statistic STRING max
+   weighted INT 0
+   gridConfig STRUCT 8
+      xmin FLOAT -500.
+      xmax FLOAT 50.
+      ymin FLOAT -500.
+      ymax FLOAT 50.
+      zmin FLOAT 0.
+      zmax FLOAT 12000.
+      hres FLOAT 4000.
+      altorig FLOAT 0.
+   products STRUCT 1
+      SURFACE STRUCT 3
+         type  STRING SURFACE_IMAGE
+         voltype STRING dBZ
+         level INT 0
