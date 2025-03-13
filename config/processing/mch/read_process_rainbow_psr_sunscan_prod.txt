@@ -54,7 +54,7 @@ txpower STRUCT 3
       AZ_EL STRUCT 1
          type STRING PLOT_TXH
       TXMEAN STRUCT 8
-         type STRING WRITE_MEAN
+         type STRING WRITE_STATS
 	 voltype STRING TXh
 	 ele_min FLOAT 0.0
 	 ele_max FLOAT 90.0

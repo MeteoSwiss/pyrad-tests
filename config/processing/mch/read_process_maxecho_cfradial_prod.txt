@@ -13,7 +13,7 @@ MAX_echo STRUCT 7
    wfunc STRING GRID
    statistic STRING max
    weighted INT 0
-   gridConfig STRUCT 8
+   gridConfig STRUCT 9
       xmin FLOAT -500.
       xmax FLOAT 50.
       ymin FLOAT -500.
@@ -21,9 +21,12 @@ MAX_echo STRUCT 7
       zmin FLOAT 0.
       zmax FLOAT 12000.
       hres FLOAT 4000.
+      vres FLOAT 13000.
       altorig FLOAT 0.
    products STRUCT 1
-      SURFACE STRUCT 3
+      SURFACE STRUCT 5
          type  STRING SURFACE_IMAGE
          voltype STRING dBZ
          level INT 0
+         vmin FLOAT 0
+         vmax FLOAT 50
