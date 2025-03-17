@@ -176,9 +176,6 @@ def run_tests(category):
         print("Invalid category value. Expected 'base' or 'mch'.")
         sys.exit(1)
 
-    os.environ['PYART_CONFIG'] = os.path.join(os.environ['PYRAD_TESTS_PATH'], 'config', 'pyart',
-        'mch_config.py')
-
     directory_test = os.path.join(os.environ['PYRAD_TESTS_PATH'], 
                                   'pyrad_products_test/')
     directory_ref = os.path.join(os.environ['PYRAD_TESTS_PATH'], 
