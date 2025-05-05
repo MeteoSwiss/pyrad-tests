@@ -1,0 +1,55 @@
+#
+# Configuration for MALS tests at the millitary airport in Meiringen
+
+# Number of radars to process
+NumRadars INT 1
+
+# Time tolerance when processing multiple radars [s]
+TimeTol FLOAT 3600.
+
+# Radar Name
+RadarName STRING DX50
+
+# Names of the radar scans in the specified sector
+# NOTE: Must have a trailing '/'
+ScanList STRARR 1
+      radar/  # masterscan: first scan of a volume
+
+# Repetition time of the scans [min]
+ScanPeriod INT 10
+
+# Image config
+ppiMapImageConfig STRUCT 11
+   mapres STRING 10m
+   latmin FLOAT 46.5
+   latmax FLOAT 47.1
+   lonmin FLOAT 6.5
+   lonmax FLOAT 7.5
+   exact_limits INT 1
+   lonstep FLOAT 0.1
+   latstep FLOAT 0.1
+   xsize FLOAT 18.
+   ysize FLOAT  10.
+   maps STRARR 6        # maps to overplot (cartopy)
+       lakes
+       countries
+       lakes_europe
+       coastlines
+       rivers
+       rivers_europe
+
+ppiImageConfig STRUCT 6
+   xsize      FLOAT  10.   # image size [inches] (default dots per inch (dpi):72)
+   ysize      FLOAT   8.   # image size [inches] (default dots per inch (dpi):72)
+   xmin       FLOAT -70.0  # Min distance on horizontal axis [km]
+   xmax       FLOAT  70.0  # Max distance on horizontal axis [km]
+   ymin       FLOAT -70.0  # Min distance on vertical axis [km]
+   ymax       FLOAT  70.0  # Max distance on vertical axis [km]
+
+rhiImageConfig STRUCT 6
+   xsize      FLOAT  10.     # image size [inches]
+   ysize      FLOAT   6.     # image size [inches]
+   xmin       FLOAT   0   # Min distance on horizontal axis [km]
+   xmax       FLOAT 30.0   # Max distance on horizontal axis [km]
+   ymin       FLOAT   0.0   # Min distance on vertical axis [km]
+   ymax       FLOAT  10.0   # Max distance on vertical axis [km]
