@@ -14,24 +14,34 @@ import filecmp
 import os
 import boto3
 
-def compare_csv_files(file1_path, file2_path, precision = 1E-3 ):
+def compare_csv_files(file1_path, file2_path, precision=1E-3):
     df1 = pd.read_csv(file1_path, comment='#')
     df2 = pd.read_csv(file2_path, comment='#')
 
-    # Check if the shape of the DataFrames match
-    if df1.shape != df2.shape:
+    # Check if shape and columns match
+    if df1.shape != df2.shape or not all(df1.columns == df2.columns):
         return False
-    if not all(df1.columns == df2.columns):
-        return False
-    
+
     if df1.shape[0] == 0:
         return True
-    else:
-        # Compare the values up to the desired precision
-        diff = abs(df1 - df2)
-        max_diff = diff.max().max()
-        
-        return max_diff <= precision
+
+    # Try converting columns to numeric where possible
+    for col in df1.columns:
+        df1[col] = pd.to_numeric(df1[col], errors='ignore')
+        df2[col] = pd.to_numeric(df2[col], errors='ignore')
+
+    for col in df1.columns:
+        series1 = df1[col]
+        series2 = df2[col]
+
+        if np.issubdtype(series1.dtype, np.number) and np.issubdtype(series2.dtype, np.number):
+            if not np.allclose(series1, series2, rtol=precision, atol=precision, equal_nan=True):
+                return False
+        else:
+            if not series1.equals(series2):
+                return False
+
+    return True
 
 def compare_images(file1_path, file2_path, precision = 1E-3):
     # Open the NetCDF files
