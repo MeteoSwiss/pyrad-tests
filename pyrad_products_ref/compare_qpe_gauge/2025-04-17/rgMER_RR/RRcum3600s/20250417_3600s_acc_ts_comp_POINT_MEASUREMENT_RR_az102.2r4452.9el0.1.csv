@@ -2,13 +2,13 @@
 # Comment lines are preceded by "#"
 # Description: 
 # Time series of a precipitation accumulation of weather radar data and another sensor over a fixed location.
-# Location [lon, lat, alt]: [8.06078, 46.740753, 567.2]
-# Nominal antenna coordinates used [az, el, r]: [np.float64(270.21891659654784), np.float64(-0.15809783630611673), np.float64(3914.001724745914)]
+# Location [lon, lat, alt]: [8.169242, 46.732129, 588.6]
+# Nominal antenna coordinates used [az, el, r]: [np.float64(102.23530567647633), np.float64(0.13639089151565043), np.float64(4452.906126512699)]
 # sensor type: rgage
-# sensor ID: BRZ
+# sensor ID: MER
 # Data: Precipitation accumulation over 3600 s
 # Fill Value: -9999.0
 # Start: 2025-04-17 01:00:00 UTC
 #
 date,np_radar,radar_value,np_sensor,sensor_value
-2025-04-17 01:00:00,4,1.2214198344723353,6,3.6000001
+2025-04-17 01:00:00,4,0.9111713589180592,6,3.8000002
