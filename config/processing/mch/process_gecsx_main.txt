@@ -24,9 +24,10 @@ imgformat STRING png
 # --------------------------------------------------------
 # S3 configuration
 # --------------------------------------------------------
-s3EndpointRead STRING https://eu-central-1.linodeobjects.com/
-s3BucketRead STRING pyrad-s3-tests
-s3PathRead STRING Cband
+s3EndpointWrite STRING https://eu-central-1.linodeobjects.com/
+s3BucketWrite STRING pyrad-s3-tests
+s3PathWrite STRING Output
+
 
 # --------------------------------------------------------
 # configuration files pathes
