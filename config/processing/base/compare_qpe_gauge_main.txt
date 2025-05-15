@@ -32,6 +32,13 @@ imgformat STRARR 1
     png
 
 # --------------------------------------------------------
+# S3 configuration
+# --------------------------------------------------------
+s3EndpointRead STRING https://eu-central-1.linodeobjects.com/
+s3BucketRead STRING pyrad-s3-tests
+s3PathRead STRING Cband
+
+# --------------------------------------------------------
 # configuration files pathes
 # --------------------------------------------------------
 

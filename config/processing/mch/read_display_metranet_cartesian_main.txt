@@ -35,6 +35,13 @@ loadname STRING  read_display_metranet_cartesian
 # --------------------------------------------
 saveimgbasepath STRING ${PYRAD_TESTS_PATH}/pyrad_products_test/
 
+# --------------------------------------------------------
+# S3 configuration
+# --------------------------------------------------------
+s3EndpointRead STRING https://eu-central-1.linodeobjects.com/
+s3BucketRead STRING pyrad-s3-tests
+s3PathRead STRING Cband
+
 # Output image format can be any accepted by Matplotlib
 # More than one output formats can be set
 imgformat STRARR 1
