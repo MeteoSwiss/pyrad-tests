@@ -13,7 +13,18 @@ import imageio
 import filecmp
 import os
 import boto3
+from contextlib import contextmanager
 
+@contextmanager
+def suppress_stdout():
+    with open(os.devnull, 'w') as devnull:
+        old_stdout = sys.stdout
+        try:
+            sys.stdout = devnull
+            yield
+        finally:
+            sys.stdout = old_stdout
+            
 def compare_csv_files(file1_path, file2_path, precision=1E-3):
     df1 = pd.read_csv(file1_path, comment='#')
     df2 = pd.read_csv(file2_path, comment='#')
@@ -200,20 +211,26 @@ def run_tests(category):
 
     for test in all_tests:
         test_bname = os.path.basename(test).split('_main')[0]
+        
+        print(f'\n=======================')
         print(f'Running test {test_bname}')
+        print(f'=======================')
         dir_test = os.path.join(directory_test, test_bname)
         dir_ref = os.path.join(directory_ref, test_bname)
         # Remove test dir if exists
         if os.path.exists(dir_test):
             shutil.rmtree(dir_test)
         if 'gecsx' in test:
-            main_gecsx(test, gather_plots=False)
+            with suppress_stdout():
+                main_gecsx(test, gather_plots=False)
         else:
             t0 = time_ref[time_ref['test_name'] == test_bname]['t0']
             t1 = time_ref[time_ref['test_name'] == test_bname]['t1']
             starttime = datetime.datetime.strptime(str(int(t0)), '%Y%m%d%H%M%S')
             endtime = datetime.datetime.strptime(str(int(t1)), '%Y%m%d%H%M%S')
-            main(test, starttime=starttime, endtime=endtime)            
+            with suppress_stdout():
+                print("Starting test ")
+                main(test, starttime=starttime, endtime=endtime)            
             
         are_identical = compare_directories(dir_test,
                                             dir_ref)

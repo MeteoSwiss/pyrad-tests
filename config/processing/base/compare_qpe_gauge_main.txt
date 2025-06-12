@@ -38,7 +38,6 @@ s3EndpointWrite STRING https://eu-central-1.linodeobjects.com/
 s3BucketWrite STRING pyrad-s3-tests
 s3PathWrite STRING Output
 
-
 # --------------------------------------------------------
 # configuration files pathes
 # --------------------------------------------------------
