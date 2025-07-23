@@ -226,8 +226,8 @@ def run_tests(category):
         else:
             t0 = time_ref[time_ref['test_name'] == test_bname]['t0']
             t1 = time_ref[time_ref['test_name'] == test_bname]['t1']
-            starttime = datetime.datetime.strptime(str(int(t0)), '%Y%m%d%H%M%S')
-            endtime = datetime.datetime.strptime(str(int(t1)), '%Y%m%d%H%M%S')
+            starttime = datetime.datetime.strptime(str(int(t0)), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
+            endtime = datetime.datetime.strptime(str(int(t1)), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
             with suppress_stdout():
                 print("Starting test ")
                 main(test, starttime=starttime, endtime=endtime)            
