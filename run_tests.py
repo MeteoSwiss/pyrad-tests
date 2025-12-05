@@ -15,115 +15,197 @@ import os
 import boto3
 from contextlib import contextmanager
 
-@contextmanager
-def suppress_stdout():
-    with open(os.devnull, 'w') as devnull:
-        old_stdout = sys.stdout
-        try:
-            sys.stdout = devnull
-            yield
-        finally:
-            sys.stdout = old_stdout
-            
-def compare_csv_files(file1_path, file2_path, precision=1E-3):
-    df1 = pd.read_csv(file1_path, comment='#')
-    df2 = pd.read_csv(file2_path, comment='#')
+BLUE = "\033[94m"
+RED = "\033[91m"
+RESET = "\033[0m"
 
-    # Check if shape and columns match
-    if df1.shape != df2.shape or not all(df1.columns == df2.columns):
+ORIGINAL_cprint = print
+
+def cprint(msg):
+    ORIGINAL_cprint(f"{BLUE}{msg}{RESET}")
+
+def cwarn(msg):
+    ORIGINAL_cprint(f"{RED}{msg}{RESET}")
+
+import builtins
+from contextlib import contextmanager
+
+@contextmanager
+def suppress_external_stdout():
+    """Suppress stdout except cprint/cwarn."""
+    original_print = builtins.print
+
+    def fake_print(*args, **kwargs):
+        # Allow PDB to print
+        import inspect
+        if any("pdb" in frame.filename for frame in inspect.stack()):
+            return original_print(*args, **kwargs)
+        # Otherwise suppress
+        pass
+
+    try:
+        builtins.print = fake_print   # disable printing globally
+        yield
+    finally:
+        builtins.print = original_print
+
+def safe_to_numeric(df):
+    for col in df.columns:
+        try:
+            df[col] = pd.to_numeric(df[col])
+        except Exception:
+            # Leave column unchanged if it cannot be converted
+            pass
+    return df
+
+# =====================================================
+# CSV COMPARISON
+# =====================================================
+def compare_csv_files(file1_path, file2_path, precision=1e-3):
+    df1 = pd.read_csv(file1_path, comment="#")
+    df2 = pd.read_csv(file2_path, comment="#")
+
+    # Shape / column mismatch
+    if df1.shape != df2.shape:
+        cwarn(f"CSV shape mismatch: {file1_path} vs {file2_path}")
+        cwarn(f"df1 shape={df1.shape}, df2 shape={df2.shape}")
         return False
 
-    if df1.shape[0] == 0:
+    if not df1.columns.equals(df2.columns):
+        cwarn(f"CSV columns differ in {file1_path} vs {file2_path}")
+        cwarn(f"df1 columns={list(df1.columns)}")
+        cwarn(f"df2 columns={list(df2.columns)}")
+        return False
+
+    if len(df1) == 0:
         return True
 
-    # Try converting columns to numeric where possible
-    for col in df1.columns:
-        df1[col] = pd.to_numeric(df1[col], errors='ignore')
-        df2[col] = pd.to_numeric(df2[col], errors='ignore')
+    # Convert numeric columns where possible
+    df1 = safe_to_numeric(df1)
+    df2 = safe_to_numeric(df2)
 
+    # Compare column by column
     for col in df1.columns:
-        series1 = df1[col]
-        series2 = df2[col]
+        s1 = df1[col]
+        s2 = df2[col]
 
-        if np.issubdtype(series1.dtype, np.number) and np.issubdtype(series2.dtype, np.number):
-            if not np.allclose(series1, series2, rtol=precision, atol=precision, equal_nan=True):
+        if np.issubdtype(s1.dtype, np.number) and np.issubdtype(s2.dtype, np.number):
+            if not np.allclose(s1, s2, rtol=precision, atol=precision, equal_nan=True):
+                diff = np.nanmax(np.abs(s1 - s2))
+                cwarn(f"CSV numeric column '{col}' differs")
+                cwarn(f"Max difference: {diff}")
                 return False
         else:
-            if not series1.equals(series2):
+            if not s1.equals(s2):
+                cwarn(f"CSV non-numeric column '{col}' differs")
                 return False
 
     return True
 
-def compare_images(file1_path, file2_path, precision = 1E-3):
-    # Open the NetCDF files
+
+# =====================================================
+# IMAGE COMPARISON
+# =====================================================
+def compare_images(file1_path, file2_path, precision=1e-3):
     im1 = imageio.imread(file1_path)
     im2 = imageio.imread(file2_path)
-    are_equal = np.allclose(im1, im2, atol=precision)
 
-    return are_equal
-
-def compare_netcdf_files(file1_path, file2_path, precision = 1E-3):
-    # Open the NetCDF files
-    file1 = Dataset(file1_path, 'r')
-    file2 = Dataset(file2_path, 'r')
-
-    are_equal = True
-    # Get the variable names from the files
-    var_names = file1.variables.keys()
-
-    for var_name in var_names:
-        # Get the variable arrays from the files
-        var1 = file1.variables[var_name][:].filled(0)
-        var2 = file2.variables[var_name][:].filled(0)
-
-        # Compare the arrays within the specified precision
-        try:
-            are_equal = np.allclose(var1, var2, atol=precision)
-        except TypeError as e:
-            are_equal = np.all(var1 == var2)
-
-        if not are_equal:
-            print(f'Variable {var_name} not equal in {file2_path}!')
-            return are_equal
-    
-    # Close the NetCDF files
-    file1.close()
-    file2.close()
-    return are_equal
-
-def compare_directories(dir_a, dir_b):
-    dir_comparison = filecmp.dircmp(dir_a, dir_b)
-
-    if dir_comparison.left_only or dir_comparison.right_only:
-        print(f'Dir {dir_a} and {dir_b} do not contain the same files')
+    if im1.shape != im2.shape:
+        cwarn(f"Image shape mismatch: {file1_path} vs {file2_path}")
         return False
 
-    for common_dir in dir_comparison.common_dirs:
-        new_dir_a = os.path.join(dir_a, common_dir)
-        new_dir_b = os.path.join(dir_b, common_dir)
-        if not compare_directories(new_dir_a, new_dir_b):
+    if not np.allclose(im1, im2, atol=precision):
+        diff = np.nanmax(np.abs(im1.astype(float) - im2.astype(float)))
+        cwarn(f"Images differ: {file1_path} vs {file2_path}")
+        cwarn(f"Max pixel diff: {diff}")
+        return False
+
+    return True
+
+
+# =====================================================
+# NETCDF COMPARISON
+# =====================================================
+def compare_netcdf_files(file1_path, file2_path, precision=1e-3):
+    with Dataset(file1_path, 'r') as nc1, Dataset(file2_path, 'r') as nc2:
+
+        vars1 = set(nc1.variables.keys())
+        vars2 = set(nc2.variables.keys())
+
+        if vars1 != vars2:
+            cwarn(f"NetCDF variable mismatch: {file1_path} vs {file2_path}")
+            cwarn(f"Only in file1: {vars1 - vars2}")
+            cwarn(f"Only in file2: {vars2 - vars1}")
             return False
 
-    for common_file in dir_comparison.common_files:
-        file_a = os.path.join(dir_a, common_file)
-        file_b = os.path.join(dir_b, common_file)
-        print(f'Comparing files {file_a} and {file_b}')
-        if '.nc' in common_file or '.NC' in common_file:
-            are_equal = compare_netcdf_files(file_a, file_b)
-            if not are_equal:
+        for var_name in vars1:
+            v1 = nc1.variables[var_name][:]
+            v2 = nc2.variables[var_name][:]
+
+            # Masked arrays → fill with NaN
+            a1 = np.array(v1.filled(np.nan))
+            a2 = np.array(v2.filled(np.nan))
+
+            if a1.shape != a2.shape:
+                cwarn(f"NetCDF variable '{var_name}' shape mismatch")
+                cwarn(f"a1 shape={a1.shape}, a2 shape={a2.shape}")
                 return False
-        elif '.png' in common_file or '.jpg' in common_file:
-            continue
-            # TODO implement image comparison that handles differences du to OS
-            #are_equal = compare_images(file_a, file_b)
-            #if not are_equal:
-            #    return False
-        elif '.csv' in common_file:
-            are_equal = compare_csv_files(file_a, file_b)
-            if not are_equal:
+
+            try:
+                equal = np.allclose(a1, a2, atol=precision, equal_nan=True)
+            except TypeError:
+                equal = np.array_equal(a1, a2)
+
+            if not equal:
+                diff = np.nanmax(np.abs(a1 - a2))
+                cwarn(f"NetCDF variable '{var_name}' differs")
+                cwarn(f"Max difference: {diff}")
                 return False
 
     return True
+
+
+# =====================================================
+# DIRECTORY COMPARISON
+# =====================================================
+def compare_directories(dir_a, dir_b):
+    cmp = filecmp.dircmp(dir_a, dir_b)
+
+    if cmp.left_only or cmp.right_only:
+        cwarn(f"Directory mismatch: {dir_a} vs {dir_b}")
+        cwarn(f"Only in {dir_a}: {cmp.left_only}")
+        cwarn(f"Only in {dir_b}: {cmp.right_only}")
+        return False
+
+    # Recurse into subdirectories
+    for d in cmp.common_dirs:
+        if not compare_directories(os.path.join(dir_a, d), os.path.join(dir_b, d)):
+            return False
+
+    # Compare actual files
+    for f in cmp.common_files:
+        a = os.path.join(dir_a, f)
+        b = os.path.join(dir_b, f)
+
+        if f.lower().endswith(".nc"):
+            if not compare_netcdf_files(a, b):
+                cwarn(f"NetCDF file mismatch: {a} vs {b}")
+                return False
+
+        elif f.lower().endswith(".csv"):
+            if not compare_csv_files(a, b):
+                cwarn(f"CSV file mismatch: {a} vs {b}")
+                return False
+
+        elif f.lower().endswith((".png", ".jpg", ".jpeg")):
+            # TODO: enable later
+            continue
+
+        else:
+            cwarn(f"Skipping unsupported file: {f}")
+
+    return True
+
 
 def compare_s3_local(local_dir: str, s3_cfg: dict, size_tolerance=0.05) -> bool:
     """
@@ -159,7 +241,7 @@ def compare_s3_local(local_dir: str, s3_cfg: dict, size_tolerance=0.05) -> bool:
     # List objects in the S3 path
     s3_objects = s3_client.list_objects_v2(Bucket=bucket, Prefix=s3_path)
     if "Contents" not in s3_objects:
-        print("No files found in the specified S3 path.")
+        cprint("No files found in the specified S3 path.")
         return []
 
     # Build a dictionary of S3 files and their sizes
@@ -194,7 +276,7 @@ def compare_s3_local(local_dir: str, s3_cfg: dict, size_tolerance=0.05) -> bool:
 def run_tests(category):
     # Validate category value
     if category != "base" and category != "mch":
-        print("Invalid category value. Expected 'base' or 'mch'.")
+        cprint("Invalid category value. Expected 'base' or 'mch'.")
         sys.exit(1)
 
     directory_test = os.path.join(os.environ['PYRAD_TESTS_PATH'], 
@@ -212,28 +294,31 @@ def run_tests(category):
     for test in all_tests:
         test_bname = os.path.basename(test).split('_main')[0]
         
-        print(f'\n=======================')
-        print(f'Running test {test_bname}')
-        print(f'=======================')
+        cprint('\n=======================')
+        cprint(f'Running test {test_bname}')
+        cprint('=======================')
         dir_test = os.path.join(directory_test, test_bname)
         dir_ref = os.path.join(directory_ref, test_bname)
         # Remove test dir if exists
         if os.path.exists(dir_test):
             shutil.rmtree(dir_test)
         if 'gecsx' in test:
-            with suppress_stdout():
+            with suppress_external_stdout():
                 main_gecsx(test, gather_plots=False)
         else:
             t0 = time_ref[time_ref['test_name'] == test_bname]['t0']
             t1 = time_ref[time_ref['test_name'] == test_bname]['t1']
-            starttime = datetime.datetime.strptime(str(int(t0)), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
-            endtime = datetime.datetime.strptime(str(int(t1)), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
-            with suppress_stdout():
-                print("Starting test ")
+            starttime = datetime.datetime.strptime(str(int(t0.iloc[0])), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
+            endtime = datetime.datetime.strptime(str(int(t1.iloc[0])), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
+            with suppress_external_stdout():
+                cprint("Starting test ")
                 main(test, starttime=starttime, endtime=endtime)            
             
         are_identical = compare_directories(dir_test,
                                             dir_ref)
+        if are_identical:
+            cprint(f'Test {test_bname} passed!')
+            
         assert are_identical
         
         if "s3" in test:
