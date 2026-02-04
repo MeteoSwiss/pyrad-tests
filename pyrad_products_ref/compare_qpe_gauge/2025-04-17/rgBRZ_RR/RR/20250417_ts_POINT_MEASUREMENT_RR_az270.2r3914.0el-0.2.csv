@@ -1,0 +1,15 @@
+# Weather radar timeseries data file
+# Comment lines are preceded by "#"
+# Description: 
+# Time series of a weather radar data over a fixed location.
+# Location [lon, lat, alt]: [8.06078, 46.740753, 567.2]
+# Nominal antenna coordinates used [az, el, r]: [270.21891659654784, -0.15809783630611673, 3914.001724745914]
+# Data: Radar estimated rain rate (mm/h)
+# Fill Value: -9999.0
+# Start: 2025-04-17 00:02:23 UTC
+#
+date,az,el,r,value
+2025-04-17 00:02:23.632795+00:00,270.49713,3.0,3937.5,1.6897223359561195
+2025-04-17 00:17:17.566460+00:00,270.49988,3.0,3937.5,0.4484474872680925
+2025-04-17 00:32:26.498970+00:00,270.49713,3.0,3937.5,1.2779985024744767
+2025-04-17 00:47:25.499702+00:00,270.49988,3.0,3937.5,1.469511012190652
