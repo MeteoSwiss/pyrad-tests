@@ -1,6 +1,6 @@
 name: read_write_s3
 path_convention: ODIM
-saveimgbasepath: /users/wolfensb/github_repos/pyrad-tests//pyrad_products_test/
+saveimgbasepath: ${PYRAD_TESTS_PATH}/pyrad_products_test/
 imgformat:
 - png
 s3EndpointRead: https://eu-central-1.linodeobjects.com/
@@ -9,6 +9,6 @@ s3PathRead: Cband
 s3EndpointWrite: https://eu-central-1.linodeobjects.com/
 s3BucketWrite: pyrad-s3-tests
 s3PathWrite: Output
-configpath: /users/wolfensb/github_repos/pyrad-tests//config/
-locationConfigFile: /users/wolfensb/github_repos/pyrad-tests//config/processing/base/read_write_s3_loc.yaml
-productConfigFile: /users/wolfensb/github_repos/pyrad-tests//config/processing/base/read_write_s3_prod.yaml
+configpath: ${PYRAD_TESTS_PATH}/config/
+locationConfigFile: ${PYRAD_TESTS_PATH}/config/processing/base/read_write_s3_loc.yaml
+productConfigFile: ${PYRAD_TESTS_PATH}/config/processing/base/read_write_s3_prod.yaml

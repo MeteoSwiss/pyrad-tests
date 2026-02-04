@@ -1,15 +1,15 @@
 name: read_process_rainbow_psr_sunscan
-datapath: /users/wolfensb/github_repos/pyrad-tests//input_data/read_process_rainbow_psr_sunscan/
-psrpath: /users/wolfensb/github_repos/pyrad-tests//input_data/read_process_rainbow_psr_sunscan/PSR/
-loadbasepath: /users/wolfensb/github_repos/pyrad-tests//pyrad_products_test/
+datapath: ${PYRAD_TESTS_PATH}/input_data/read_process_rainbow_psr_sunscan/
+psrpath: ${PYRAD_TESTS_PATH}/input_data/read_process_rainbow_psr_sunscan/PSR/
+loadbasepath: ${PYRAD_TESTS_PATH}/pyrad_products_test/
 loadname: read_process_rainbow_psr_sunscan
 solarfluxpath: /store/msrad/radar/solar_flux/
-saveimgbasepath: /users/wolfensb/github_repos/pyrad-tests//pyrad_products_test/
+saveimgbasepath: ${PYRAD_TESTS_PATH}/pyrad_products_test/
 s3EndpointWrite: https://eu-central-1.linodeobjects.com/
 s3BucketWrite: pyrad-s3-tests
 s3PathWrite: Output
 imgformat:
 - png
-configpath: /users/wolfensb/github_repos/pyrad-tests//config/
-locationConfigFile: /users/wolfensb/github_repos/pyrad-tests//config/processing/mch/read_process_rainbow_psr_sunscan_loc.yaml
-productConfigFile: /users/wolfensb/github_repos/pyrad-tests//config/processing/mch/read_process_rainbow_psr_sunscan_prod.yaml
+configpath: ${PYRAD_TESTS_PATH}/config/
+locationConfigFile: ${PYRAD_TESTS_PATH}/config/processing/mch/read_process_rainbow_psr_sunscan_loc.yaml
+productConfigFile: ${PYRAD_TESTS_PATH}/config/processing/mch/read_process_rainbow_psr_sunscan_prod.yaml
