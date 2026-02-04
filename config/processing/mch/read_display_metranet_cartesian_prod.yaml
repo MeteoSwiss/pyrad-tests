@@ -1,0 +1,47 @@
+dataSetList:
+- RZC
+- POH
+- RZC_POH
+- SAVEGRID
+RZC:
+  type: RAW_GRID
+  datatype: RAD4ALPGRID:RZC
+  products:
+    SURFACE:
+      type: SURFACE_IMAGE
+      voltype: RR
+      level: 0
+    HISTOGRAM:
+      type: HISTOGRAM
+      voltype: RR
+      mask_val: 0.03526497
+      write_data: 1
+POH:
+  type: RAW_GRID
+  datatype: RAD4ALPGRID:BZC
+  products:
+    SURFACE:
+      type: SURFACE_IMAGE
+      voltype: POH
+      level: 0
+RZC_POH:
+  type: RAW_GRID
+  datatype:
+  - RAD4ALPGRID:RZC
+  - RAD4ALPGRID:BZC
+  products:
+    SURFACE_CONTOUR:
+      type: SURFACE_CONTOUR_OVERPLOT
+      voltype: RR
+      contourtype: POH
+      level: 0
+      contour_values:
+      - 80.0
+SAVEGRID:
+  type: RAW_GRID
+  datatype:
+  - RAD4ALPGRID:RZC
+  - RAD4ALPGRID:BZC
+  products:
+    SAVEALL:
+      type: SAVEALL

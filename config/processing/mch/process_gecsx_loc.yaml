@@ -1,0 +1,75 @@
+NumRadars: 1
+frequency: 9.48
+radar_beam_width_h: 1.0
+pulse_width: 3.3e-07
+txpwrh: 35000.0
+AntennaGainH: 42.2
+mflossh: 1.0
+lrxh: 2.6
+RadarPosition:
+  latitude: 47.49642
+  longitude: 8.64704
+  altitude: 646.0
+attg: 0.012
+AzimTol: 0.0
+mosotti_factor: 0.9644
+refcorr: 1.33333
+ppiImageConfig:
+  xsize: 10.0
+  ysize: 8.0
+  xmin: -60.0
+  xmax: 60.0
+  ymin: -60.0
+  ymax: 60.0
+  rngRing: 20.0
+  dpi: 72
+rhiImageConfig:
+  xsize: 10.0
+  ysize: 5.0
+  xmin: 0.0
+  xmax: 100.0
+  ymin: 0.0
+  ymax: 12.0
+  dpi: 72
+ppiMapImageConfig:
+  rngRing: 20.0
+  xsize: 7.0
+  ysize: 7.0
+  lonmin: 8.0
+  lonmax: 9.0
+  latmin: 47.0
+  latmax: 48.0
+  mapres: 10m
+  dpi: 72
+  maps:
+  - relief
+  - countries
+  - provinces
+  - urban_areas
+  - roads
+  - railroads
+  - coastlines
+  - lakes
+  - lakes_europe
+  - rivers
+  - rivers_europe
+gridMapImageConfig:
+  xsize: 10.0
+  ysize: 8.0
+  lonmin: 8.0
+  lonmax: 9.0
+  lonstep: 0.25
+  latmin: 47.0
+  latmax: 48.0
+  latstep: 0.25
+  exact_limits: 1
+  mapres: h
+  dpi: 72
+  maps:
+  - countries
+  - provinces
+  - coastlines
+  - lakes
+  - lakes_europe
+  - rivers
+  - rivers_europe

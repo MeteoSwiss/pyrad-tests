@@ -1,0 +1,136 @@
+dataSetList:
+- l0:ZH
+- l0:ZH_grid
+- l0:echoID
+- l1:echoFilter
+- l2:SNRFilter
+- l3:KDPc_maesaka
+- l4:Att_ZPhi
+- l5:hydroclass
+ZH:
+  type: RAW
+  datatype: CFRADIAL:dBZ
+  products:
+    EL001:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: dBZ
+    AZ270:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: dBZ
+ZH_grid:
+  type: GRID
+  datatype: CFRADIAL:dBZ
+  wfunc: NEAREST
+  gridConfig:
+    xmin: -500.0
+    xmax: 50.0
+    ymin: -500.0
+    ymax: 50.0
+    zmin: 0.0
+    zmax: 12000.0
+    hres: 4000.0
+    vres: 2000.0
+    altorig: 0.0
+  products:
+    LAT:
+      type: LATITUDE_SLICE
+      voltype: dBZ
+      lat: 46.04
+      lon: 8.83
+    SURFACE:
+      type: SURFACE_IMAGE
+      voltype: dBZ
+      level: 1
+echoID:
+  type: SAN
+  datatype:
+  - CFRADIAL:dBZ
+  - CFRADIAL:ZDR
+  - CFRADIAL:uPhiDP
+  - CFRADIAL:uRhoHV
+  MAKE_GLOBAL: 1
+echoFilter:
+  type: ECHO_FILTER
+  datatype:
+  - PROC:echoID
+  - CFRADIAL:dBZ
+  - CFRADIAL:ZDR
+  - CFRADIAL:uRhoHV
+  - CFRADIAL:uPhiDP
+  echo_type: 3
+  MAKE_GLOBAL: 1
+SNRFilter:
+  type: SNR_FILTER
+  datatype:
+  - CFRADIAL:SNR
+  - PROC:PhiDPc
+  SNRmin: 3.0
+  MAKE_GLOBAL: 1
+KDPc_maesaka:
+  type: PHIDP_KDP_MAESAKA
+  datatype:
+  - PROC:PhiDPc
+  - PROC:dBZc
+  - CFRADIALPYRAD:TEMP,TEMP,SAVEVOL_TEMP
+  rmin: 1000.0
+  rmax: 50000.0
+  rcell: 1000.0
+  Zmin: 20.0
+  Zmax: 40.0
+  rwinds: 1000.0
+  rwindl: 3000.0
+  Zthr: 40.0
+  MAKE_GLOBAL: 1
+  products:
+    EL001:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: KDPc
+    AZ270:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: KDPc
+Att_ZPhi:
+  type: ATTENUATION
+  datatype:
+  - PROC:dBZc
+  - PROC:ZDRc
+  - PROC:PhiDPc
+  - CFRADIALPYRAD:TEMP,TEMP,SAVEVOL_TEMP
+  ATT_METHOD: ZPhi
+  MAKE_GLOBAL: 1
+  products:
+    EL001_dBZc:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: dBZc
+    AZ270_dBZc:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: dBZc
+hydroclass:
+  type: HYDROCLASS
+  datatype:
+  - PROC:dBZc
+  - PROC:ZDRc
+  - PROC:RhoHVc
+  - PROC:KDPc
+  - CFRADIALPYRAD:TEMP,TEMP,SAVEVOL_TEMP
+  HYDRO_METHOD: SEMISUPERVISED
+  RADARCENTROIDS: L
+  MAKE_GLOBAL: 1
+  products:
+    EL001_dBZc:
+      type: PPI_MAP
+      anglenr: 2
+      voltype: hydro
+    AZ270_dBZc:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: hydro

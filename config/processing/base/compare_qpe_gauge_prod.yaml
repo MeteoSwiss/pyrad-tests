@@ -1,0 +1,74 @@
+dataSetList:
+- l0:rainrate
+- l1:rgMER_RR
+- l1:rgBRZ_RR
+rainrate:
+  type: RAINRATE
+  datatype:
+  - dBZ
+  RR_METHOD: Z
+  MAKE_GLOBAL: 1
+rgBRZ_RR:
+  type: POINT_MEASUREMENT
+  datatype:
+  - PROC:RR
+  latlon: 1
+  truealt: 1
+  lat: 46.740753
+  lon: 8.06078
+  alt: 567.2
+  AziTol: 1.0
+  EleTol: 5.0
+  RngTol: 300.0
+  products:
+    RR:
+      type: PLOT_AND_WRITE_POINT
+    RRcomp:
+      type: COMPARE_POINT
+      prdid: RR
+      sensor: rgage
+      sensorid: BRZ
+    RRcumcomp:
+      type: COMPARE_CUMULATIVE_POINT
+      prdid: RR
+      sensor: rgage
+      sensorid: BRZ
+    RRcum3600s:
+      type: COMPARE_TIME_AVG
+      prdid: RR
+      sensor: rgage
+      sensorid: BRZ
+      cum_time: 3600
+      base_time: 0
+rgMER_RR:
+  type: POINT_MEASUREMENT
+  datatype:
+  - PROC:RR
+  latlon: 1
+  truealt: 1
+  lat: 46.732129
+  lon: 8.169242
+  alt: 588.6
+  AziTol: 1.0
+  EleTol: 5.0
+  RngTol: 300.0
+  products:
+    RR:
+      type: PLOT_AND_WRITE_POINT
+    RRcomp:
+      type: COMPARE_POINT
+      prdid: RR
+      sensor: rgage
+      sensorid: MER
+    RRcumcomp:
+      type: COMPARE_CUMULATIVE_POINT
+      prdid: RR
+      sensor: rgage
+      sensorid: MER
+    RRcum3600s:
+      type: COMPARE_TIME_AVG
+      prdid: RR
+      sensor: rgage
+      sensorid: MER
+      cum_time: 3600
+      base_time: 0

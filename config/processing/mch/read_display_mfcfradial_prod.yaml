@@ -1,0 +1,52 @@
+dataSetList:
+- dBuZ
+- V
+- sigma
+- SAVEVOL
+dBuZ:
+  type: RAW
+  datatype: CFRADIAL:dBuZ,D{%Y-%m-%d}-F{%Y%m%d%H%M}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: dBuZ
+      anglenr: 0
+    PPI_EL03:
+      type: PPI_IMAGE
+      voltype: dBuZ
+      anglenr: 3
+V:
+  type: RAW
+  datatype: CFRADIAL:V,D{%Y-%m-%d}-F{%Y%m%d%H%M}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: V
+      anglenr: 0
+    PPI_EL03:
+      type: PPI_IMAGE
+      voltype: V
+      anglenr: 3
+sigma:
+  type: RAW
+  datatype: CFRADIAL:sigma_zh,D{%Y-%m-%d}-F{%Y%m%d%H%M}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: sigma_zh
+      anglenr: 0
+    PPI_EL03:
+      type: PPI_IMAGE
+      voltype: sigma_zh
+      anglenr: 3
+SAVEVOL:
+  type: NCVOL
+  datatype:
+  - CFRADIAL:dBuZ,D{%Y-%m-%d}-F{%Y%m%d%H%M}
+  products:
+    NC:
+      type: SAVEALL
+      file_type: nc
+H5:
+  type: SAVEALL
+  file_type: h5

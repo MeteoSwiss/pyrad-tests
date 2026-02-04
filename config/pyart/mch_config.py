@@ -236,7 +236,8 @@ terrain_aspect = "terrain_aspect"
 elevation_angle = "elevation_angle"
 visibility = "visibility"
 min_vis_altitude = "min_vis_altitude"
-min_vis_altitude_above_ground = "min_vis_altitude_above_ground"
+min_vis_height_above_ground = "min_vis_height_above_ground"
+min_rad_vis_height_above_ground = "min_rad_vis_height_above_ground"
 min_vis_elevation = "min_vis_elevation"
 incident_angle = "incident_angle"
 effective_area = "effective_area"
@@ -564,7 +565,8 @@ DEFAULT_FIELD_NAMES = {
     "elevation_angle": elevation_angle,
     "visibility": visibility,
     "min_vis_altitude": min_vis_altitude,
-    "min_vis_altitude_above_ground": min_vis_altitude_above_ground,
+    "min_vis_height_above_ground": min_vis_height_above_ground,
+    "min_rad_vis_height_above_ground": min_rad_vis_height_above_ground,
     "min_vis_elevation": min_vis_elevation,
     "incident_angle": incident_angle,
     "effective_area": effective_area,
@@ -1644,6 +1646,18 @@ DEFAULT_METADATA = {
         "units": "meters",
         "standard_name": "min_vis_altitude",
         "long_name": "Minimum visible altitude",
+        "coordinates": "x y",
+    },
+    min_vis_height_above_ground: {
+        "units": "meters",
+        "standard_name": "min_vis_height_above_ground",
+        "long_name": "Minimum visible height above ground",
+        "coordinates": "x y",
+    },
+    min_rad_vis_height_above_ground: {
+        "units": "meters",
+        "standard_name": "min_rad_vis_height_above_ground",
+        "long_name": "Minimum radar visible height above ground",
         "coordinates": "x y",
     },
     min_vis_elevation: {
@@ -4335,8 +4349,8 @@ DEFAULT_FIELD_COLORMAP = {
     sun_hit_h: "LangRainbow12",
     sun_hit_v: "LangRainbow12",
     sun_hit_zdr: "LangRainbow12",
-    radar_echo_classification: "LangRainbow12",
-    corrected_radar_echo_classification: "LangRainbow12",
+    radar_echo_classification: "hydroclass10",
+    corrected_radar_echo_classification: "hydroclass10",
     hydroclass_entropy: "LangRainbow12",
     proportion_AG: "LangRainbow12",
     proportion_CR: "LangRainbow12",
@@ -4623,4 +4637,18 @@ DEFAULT_FIELD_LIMITS = {
     # relative_beta: (0., 4e-6),
     # absolute_beta: (0., 4e-6),
     # cnr: 'Carbone17',
+}
+
+DEFAULT_RGB_BOUNDS = {
+    reflectivity: ((30, 60), (0, 1)),
+    differential_reflectivity: ((0, 4), (0, 1)),
+    cross_correlation_ratio: ((1, 0.7), (0, 1)),
+    uncorrected_cross_correlation_ratio: ((1, 0.7), (0, 1)),
+}
+
+DEFAULT_RGB_ALPHA = {
+    reflectivity: (
+        (-10, 0, 10, 15, 20, 24, 28, 31, 34, 37, 40),
+        (0.05, 0.12, 0.22, 0.29, 0.39, 0.48, 0.58, 0.67, 0.77, 0.88, 1),
+    )
 }

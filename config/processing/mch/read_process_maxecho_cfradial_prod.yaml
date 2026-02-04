@@ -1,0 +1,25 @@
+dataSetList:
+- l0:MAX_echo
+MAX_echo:
+  type: GRID_STATS
+  datatype: CFRADIAL:dBZ
+  wfunc: GRID
+  statistic: max
+  weighted: 0
+  gridConfig:
+    xmin: -500.0
+    xmax: 50.0
+    ymin: -500.0
+    ymax: 50.0
+    zmin: 0.0
+    zmax: 12000.0
+    hres: 4000.0
+    vres: 13000.0
+    altorig: 0.0
+  products:
+    SURFACE:
+      type: SURFACE_IMAGE
+      voltype: dBZ
+      level: 0
+      vmin: 0.0
+      vmax: 50.0

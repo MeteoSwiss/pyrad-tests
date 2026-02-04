@@ -1,0 +1,19 @@
+dataSetList:
+- l0:load_data
+- l1:dBZ
+load_data:
+  type: RAW
+  datatype: CFRADIALPYRAD:all_fields,SAVEVOL,NC
+  MAKE_GLOBAL: 1
+dBZ:
+  type: RAW
+  datatype: PROC:dBZ
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: dBZ
+      anglenr: 0
+    CAPPI_2000:
+      type: CAPPI_IMAGE
+      voltype: dBZ
+      altitude: 2000.0

@@ -1,0 +1,26 @@
+dataSetList:
+- CPC0005
+- CPC0060
+- SAVEGRID
+CPC0005:
+  type: RAW_GRID
+  datatype: RAD4ALPGIF:CPC0005
+  products:
+    SURFACE:
+      type: SURFACE_IMAGE
+      voltype: RR
+      level: 0
+CPC0060:
+  type: RAW_GRID
+  datatype: RAD4ALPGIF:CPC0060
+  products:
+    SURFACE:
+      type: SURFACE_IMAGE
+      voltype: Raccu
+      level: 0
+SAVEGRID:
+  type: RAW_GRID
+  datatype: RAD4ALPGIF:CPC0005
+  products:
+    SAVEALL:
+      type: SAVEALL

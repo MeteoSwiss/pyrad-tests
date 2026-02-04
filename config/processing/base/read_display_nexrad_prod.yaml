@@ -1,0 +1,97 @@
+dataSetList:
+- l0:dBZ
+- l0:ZDR
+- l0:RhoHV
+- l0:PhiDP
+- l0:V
+- l0:W
+- l1:SAVEVOL
+dBZ:
+  type: RAW
+  datatype: NEXRADII:dBZ,D{%Y-%m-%d}-F{%Y%m%d_%H%M}
+  products:
+    PPI:
+      type: PPI_IMAGE
+      voltype: dBZ
+      anglenr: 0
+    RHI:
+      type: PSEUDORHI_IMAGE
+      voltype: dBZ
+      angle: 90.0
+      AziTol: 0.5
+ZDR:
+  type: RAW
+  datatype: NEXRADII:ZDR,D{%Y-%m-%d}-F{%Y%m%d_%H%M}
+  products:
+    PPI:
+      type: PPI_IMAGE
+      voltype: ZDR
+      anglenr: 0
+    RHI:
+      type: PSEUDORHI_IMAGE
+      voltype: ZDR
+      angle: 90.0
+      AziTol: 0.5
+RhoHV:
+  type: RAW
+  datatype: NEXRADII:RhoHV,D{%Y-%m-%d}-F{%Y%m%d_%H%M}
+  products:
+    PPI:
+      type: PPI_IMAGE
+      voltype: RhoHV
+      anglenr: 0
+    RHI:
+      type: PSEUDORHI_IMAGE
+      voltype: RhoHV
+      angle: 90.0
+      AziTol: 0.5
+PhiDP:
+  type: RAW
+  datatype: NEXRADII:PhiDP,D{%Y-%m-%d}-F{%Y%m%d_%H%M}
+  products:
+    PPI:
+      type: PPI_IMAGE
+      voltype: PhiDP
+      anglenr: 0
+    RHI:
+      type: PSEUDORHI_IMAGE
+      voltype: PhiDP
+      angle: 90.0
+      AziTol: 0.5
+V:
+  type: RAW
+  datatype: NEXRADII:V,D{%Y-%m-%d}-F{%Y%m%d_%H%M}
+  products:
+    PPI:
+      type: PPI_IMAGE
+      voltype: V
+      anglenr: 0
+    RHI:
+      type: PSEUDORHI_IMAGE
+      voltype: V
+      angle: 90.0
+      AziTol: 0.5
+W:
+  type: RAW
+  datatype: NEXRADII:W,D{%Y-%m-%d}-F{%Y%m%d_%H%M}
+  products:
+    PPI:
+      type: PPI_IMAGE
+      voltype: W
+      anglenr: 0
+    RHI:
+      type: PSEUDORHI_IMAGE
+      voltype: W
+      angle: 90.0
+      AziTol: 0.5
+SAVEVOL:
+  type: NCVOL
+  datatype:
+  - NEXRADII:dBZ,D{%Y-%m-%d}-F{%Y%m%d_%H%M}
+  products:
+    NC:
+      type: SAVEALL
+      file_type: nc
+H5:
+  type: SAVEALL
+  file_type: h5

@@ -1,0 +1,180 @@
+dataSetList:
+- rQVP
+- SVP
+- EVP
+- VP
+QVP:
+  type: QVP
+  datatype:
+  - ODIM:dBZ,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:ZDR,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:RhoHV,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:KDP,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  angle: 0
+  interp_kind: nearest
+  hres: 2.0
+  products:
+    TIME_HEIGHT_dBZ:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: dBZ
+    TIME_HEIGHT_ZDR:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: ZDR
+      vmin: 0.0
+      vmax: 2.0
+    TIME_HEIGHT_RhoHV:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: RhoHV
+      vmin: 0.7
+      vmax: 1.0
+    TIME_HEIGHT_KDP:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: KDP
+      vmin: 0.0
+      vmax: 1.0
+rQVP:
+  type: rQVP
+  datatype:
+  - ODIM:dBZ,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:ZDR,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:RhoHV,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:KDP,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  interp_kind: nearest
+  weight_power: -1.0
+  hres: 2.0
+  products:
+    TIME_HEIGHT_dBZ:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: dBZ
+    TIME_HEIGHT_ZDR:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: ZDR
+      vmin: 0.0
+      vmax: 2.0
+    TIME_HEIGHT_RhoHV:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: RhoHV
+      vmin: 0.7
+      vmax: 1.0
+    TIME_HEIGHT_KDP:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: KDP
+      vmin: 0.0
+      vmax: 1.0
+SVP:
+  type: SVP
+  datatype:
+  - ODIM:dBZ,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:ZDR,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:RhoHV,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:KDP,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  angle: 0
+  lon: 6.2
+  lat: 43.0
+  latlon_tol: 0.005
+  interp_kind: nearest
+  hres: 2.0
+  hmax: 1500.0
+  products:
+    TIME_HEIGHT_dBZ:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: dBZ
+    TIME_HEIGHT_ZDR:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: ZDR
+    TIME_HEIGHT_RhoHV:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: RhoHV
+    TIME_HEIGHT_KDP:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: KDP
+EVP:
+  type: EVP
+  datatype:
+  - ODIM:dBZ,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:ZDR,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:RhoHV,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:KDP,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  lon: 6.2
+  lat: 43.0
+  latlon_tol: 0.005
+  interp_kind: nearest
+  hres: 2.0
+  products:
+    TIME_HEIGHT_dBZ:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: dBZ
+    TIME_HEIGHT_ZDR:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: ZDR
+    TIME_HEIGHT_RhoHV:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: RhoHV
+    TIME_HEIGHT_KDP:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: KDP
+VP:
+  type: TIME_HEIGHT
+  datatype:
+  - ODIM:dBZ,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:ZDR,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:RhoHV,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  - ODIM:KDP,D{%Y-%m-%d}-F{%Y%m%d%H%M00}
+  lon: 6.2
+  lat: 43.0
+  latlon_tol: 0.1
+  interp_kind: nearest
+  hres: 2.0
+  products:
+    TIME_HEIGHT_dBZ:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: dBZ
+    TIME_HEIGHT_ZDR:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: ZDR
+    TIME_HEIGHT_RhoHV:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: RhoHV
+    TIME_HEIGHT_KDP:
+      qvp_type: final
+      type: TIME_RANGE
+      anglenr: 0
+      voltype: KDP

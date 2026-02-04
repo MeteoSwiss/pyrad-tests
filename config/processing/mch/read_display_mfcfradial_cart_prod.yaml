@@ -1,0 +1,145 @@
+dataSetList:
+- l0:dBuZ
+- l0:dBZ
+- l0:ZDR
+- l0:RhoHV
+- l0:PhiDP
+- l0:KDP
+- l0:PIA
+- l0:V
+- l0:H_ISO0
+- l0:H_ISO0_GRIB
+- l1:hydroMF
+- l1:hydro_fromMF
+- l1:hydro_semisupervised
+- l2:SAVEVOL
+dBuZ:
+  type: RAW
+  datatype: ODIM:dBuZ,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: dBuZ
+      anglenr: 0
+dBZ:
+  type: RAW
+  datatype: ODIM:dBZ,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: dBZ
+      anglenr: 0
+ZDR:
+  type: RAW
+  datatype: ODIM:ZDR,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: ZDR
+      anglenr: 0
+RhoHV:
+  type: RAW
+  datatype: ODIM:RhoHV,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: RhoHV
+      anglenr: 0
+PhiDP:
+  type: RAW
+  datatype: ODIM:PhiDP,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: PhiDP
+      anglenr: 0
+KDP:
+  type: RAW
+  datatype: ODIM:KDP,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: KDP
+      anglenr: 0
+PIA:
+  type: RAW
+  datatype: ODIM:PIA,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: PIA
+      anglenr: 0
+V:
+  type: RAW
+  datatype: ODIM:V,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: V
+      anglenr: 0
+H_ISO0:
+  type: ISO0_MF
+  datatype: ODIM:dBZ,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  iso0_statistic: avg_by_dist
+  MAKE_GLOBAL: 0
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: H_ISO0
+      anglenr: 0
+H_ISO0_GRIB:
+  type: ISO0_GRIB
+  datatype: ODIM:dBZ,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  MAKE_GLOBAL: 1
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: H_ISO0
+      anglenr: 0
+hydroMF:
+  type: RAW
+  datatype: ODIM:hydroMF,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: hydroMF
+      anglenr: 0
+hydro_fromMF:
+  type: hydroMF_to_hydro
+  datatype: ODIM:hydroMF,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  MAKE_GLOBAL: 0
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: hydro
+      anglenr: 0
+hydro_semisupervised:
+  type: HYDROCLASS
+  datatype:
+  - ODIM:dBZ,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  - ODIM:ZDR,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  - ODIM:RhoHV,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  - ODIM:KDP,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  - PROC:H_ISO0
+  HYDRO_METHOD: SEMISUPERVISED
+  centroids_file: centroids_D.csv
+  compute_entropy: 0
+  output_distances: 0
+  vectorize: 1
+  MAKE_GLOBAL: 0
+  products:
+    PPI_EL00:
+      type: PPI_IMAGE
+      voltype: hydro
+      anglenr: 0
+SAVEVOL:
+  type: NCVOL
+  datatype:
+  - ODIM:dBZ,D{%Y%m%d????00}-F{%Y%m%d%H%M00}
+  products:
+    NC:
+      type: SAVEALL
+      file_type: nc
+H5:
+  type: SAVEALL
+  file_type: h5

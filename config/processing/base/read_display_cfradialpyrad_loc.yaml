@@ -1,0 +1,17 @@
+RadarName: MTCY
+RadarRes: L
+ScanPeriod: 5
+ppiImageConfig:
+  xsize: 10.0
+  ysize: 8.0
+  xmin: -100.0
+  xmax: 100.0
+  ymin: -100.0
+  ymax: 100.0
+xsecImageConfig:
+  xsize: 9.0
+  ysize: 7.0
+  xmin: 0.0
+  xmax: 100.0
+  ymin: 0.0
+  ymax: 8.0

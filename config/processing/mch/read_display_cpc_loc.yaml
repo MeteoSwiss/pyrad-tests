@@ -1,0 +1,20 @@
+ScanPeriod: 2.5
+gridMapImageConfig:
+  xsize: 10.0
+  ysize: 8.0
+  lonmin: 8.0
+  lonmax: 10.0
+  lonstep: 0.5
+  latmin: 47.0
+  latmax: 48.0
+  latstep: 0.5
+  mapres: 10m
+  background_zoom: 8
+  dpi: 72
+  maps:
+  - countries
+  - provinces
+  - lakes
+  - lakes_europe
+  - rivers
+  - rivers_europe

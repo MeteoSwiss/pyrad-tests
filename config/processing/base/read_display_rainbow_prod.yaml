@@ -1,0 +1,135 @@
+dataSetList:
+- dBZ
+- ZDR
+- RhoHV
+- PhiDP
+- KDP
+- V
+- W
+dBZ:
+  type: RAW
+  datatype: dBZ
+  products:
+    EL02_9:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: dBZ
+    EL30_0:
+      type: PPI_IMAGE
+      anglenr: 9
+      voltype: dBZ
+    AZ270_0:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: dBZ
+    ALT2000:
+      type: CAPPI_IMAGE
+      altitude: 2000.0
+      voltype: dBZ
+    BSCOPE_EL02_9:
+      type: BSCOPE_IMAGE
+      anglenr: 2
+      voltype: dBZ
+ZDR:
+  type: RAW
+  datatype: ZDR
+  products:
+    EL02_9:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: ZDR
+    EL30_0:
+      type: PPI_IMAGE
+      anglenr: 9
+      voltype: ZDR
+    AZ270_0:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: ZDR
+RhoHV:
+  type: RAW
+  datatype: RhoHV
+  products:
+    EL02_9:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: RhoHV
+    EL30_0:
+      type: PPI_IMAGE
+      anglenr: 9
+      voltype: RhoHV
+    AZ270_0:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: RhoHV
+PhiDP:
+  type: RAW
+  datatype: PhiDP
+  products:
+    EL02_9:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: PhiDP
+    EL30_0:
+      type: PPI_IMAGE
+      anglenr: 9
+      voltype: PhiDP
+    AZ270_0:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: PhiDP
+KDP:
+  type: RAW
+  datatype: KDP
+  products:
+    EL02_9:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: KDP
+    EL30_0:
+      type: PPI_IMAGE
+      anglenr: 9
+      voltype: KDP
+    AZ270_0:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: KDP
+V:
+  type: RAW
+  datatype: V
+  products:
+    EL02_9:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: V
+    EL30_0:
+      type: PPI_IMAGE
+      anglenr: 9
+      voltype: V
+    AZ270_0:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: V
+W:
+  type: RAW
+  datatype: W
+  products:
+    EL02_9:
+      type: PPI_IMAGE
+      anglenr: 2
+      voltype: W
+    EL30_0:
+      type: PPI_IMAGE
+      anglenr: 9
+      voltype: W
+    AZ270_0:
+      type: PSEUDORHI_IMAGE
+      angle: 270.0
+      AziTol: 1.0
+      voltype: W

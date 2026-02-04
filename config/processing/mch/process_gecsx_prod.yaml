@@ -1,0 +1,28 @@
+dataSetList:
+- gecsx
+gecsx:
+  type: GECSX
+  datatype: dBZ
+  demfile: swisstopo_DEM.tif
+  demproj: '21781'
+  az_discretization: 2.0
+  range_discretization: 1000.0
+  do_range_weighting: 1
+  raster_oversampling: 1
+  verbose: 1
+  clip: 1
+  sigma0_method: Gabella
+  rmax: 30000.0
+  azmin: 180.0
+  azmax: 360.0
+  anglestep: 1.0
+  range_resolution: 500.0
+  antenna_elevations:
+  - 1.0
+  - 1.8
+  - 2.7
+  products:
+    NC_POL:
+      type: SAVEALL_VOL
+    NC_CART:
+      type: SAVEALL_GRID

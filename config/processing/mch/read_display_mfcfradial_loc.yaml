@@ -1,0 +1,29 @@
+RadarName: MTCY
+RadarRes: L
+ScanList:
+- PAG_67_data_
+ScanPeriod: 15
+ppiImageConfig:
+  xsize: 10.0
+  ysize: 8.0
+  xmin: -100.0
+  xmax: 100.0
+  ymin: -100.0
+  ymax: 100.0
+path_convention: ODIM
+DataTypeIDInFiles:
+  dBuZ: TH
+  ZDR: ZDR
+  RhoHV: RHOHV
+  uPhiDP: PHIDP
+  KDP: KDP
+  V: VRAD
+  W: WIDTH
+  sigma_zh: SIGMA
+rhiImageConfig:
+  xsize: 9.0
+  ysize: 7.0
+  xmin: 0.0
+  xmax: 100.0
+  ymin: 0.0
+  ymax: 8.0

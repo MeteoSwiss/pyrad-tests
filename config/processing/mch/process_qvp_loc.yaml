@@ -1,0 +1,22 @@
+RadarName: COLL
+RadarRes: L
+elmax: 80.0
+ScanList:
+- ODIM_VOL_HR_COLL_
+ScanPeriod: 5
+radar_beam_width_h: 1.25
+frequency: 2810000000.0
+ppiImageConfig:
+  xsize: 10.0
+  ysize: 8.0
+  xmin: -100.0
+  xmax: 100.0
+  ymin: -100.0
+  ymax: 100.0
+rhiImageConfig:
+  xsize: 9.0
+  ysize: 7.0
+  xmin: 0.0
+  xmax: 100.0
+  ymin: 0.0
+  ymax: 8.0

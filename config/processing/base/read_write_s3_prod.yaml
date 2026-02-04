@@ -1,0 +1,10 @@
+dataSetList:
+- l0:reflectivity
+reflectivity:
+  type: RAW
+  datatype:
+  - CFRADIAL:dBZ,D{}-F{%Y%m%d%H%M}
+  products:
+    SAVEVOL:
+      voltype: dBZ
+      type: SAVEVOL

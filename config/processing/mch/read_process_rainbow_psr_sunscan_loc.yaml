@@ -1,0 +1,11 @@
+RadarName: DX50
+ScanList:
+- SunScan.vol/
+RADARBEAMWIDTH: 1.35
+AntennaGainH: 42.2
+AntennaGainV: 42.2
+ang_tol: 0.03
+ScanPeriod: 10
+ppiImageConfig:
+  xsize: 10.0
+  ysize: 8.0

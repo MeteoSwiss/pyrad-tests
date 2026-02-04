@@ -1,0 +1,38 @@
+NumRadars: 1
+TimeTol: 3600.0
+RadarName: DX50
+ScanList:
+- radar/
+ScanPeriod: 10
+ppiMapImageConfig:
+  mapres: 10m
+  latmin: 46.5
+  latmax: 47.1
+  lonmin: 6.5
+  lonmax: 7.5
+  exact_limits: 1
+  lonstep: 0.1
+  latstep: 0.1
+  xsize: 18.0
+  ysize: 10.0
+  maps:
+  - lakes
+  - countries
+  - lakes_europe
+  - coastlines
+  - rivers
+  - rivers_europe
+ppiImageConfig:
+  xsize: 10.0
+  ysize: 8.0
+  xmin: -70.0
+  xmax: 70.0
+  ymin: -70.0
+  ymax: 70.0
+rhiImageConfig:
+  xsize: 10.0
+  ysize: 6.0
+  xmin: 0.0
+  xmax: 30.0
+  ymin: 0.0
+  ymax: 10.0

@@ -13,7 +13,8 @@ import imageio
 import filecmp
 import os
 import boto3
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
+from pandas.api.types import is_numeric_dtype
 
 BLUE = "\033[94m"
 RED = "\033[91m"
@@ -30,9 +31,12 @@ def cwarn(msg):
 import builtins
 from contextlib import contextmanager
 
-@contextmanager
+
+def running_under_pytest() -> bool:
+    return ("PYTEST_CURRENT_TEST" in os.environ) or ("pytest" in sys.modules)
+
+#contextmanager
 def suppress_external_stdout():
-    """Suppress stdout except cprint/cwarn."""
     original_print = builtins.print
 
     def fake_print(*args, **kwargs):
@@ -41,13 +45,15 @@ def suppress_external_stdout():
         if any("pdb" in frame.filename for frame in inspect.stack()):
             return original_print(*args, **kwargs)
         # Otherwise suppress
-        pass
+        return None
 
     try:
-        builtins.print = fake_print   # disable printing globally
+        builtins.print = fake_print
         yield
     finally:
         builtins.print = original_print
+
+ctx = suppress_external_stdout() if running_under_pytest() else nullcontext
 
 def safe_to_numeric(df):
     for col in df.columns:
@@ -89,7 +95,7 @@ def compare_csv_files(file1_path, file2_path, precision=1e-3):
         s1 = df1[col]
         s2 = df2[col]
 
-        if np.issubdtype(s1.dtype, np.number) and np.issubdtype(s2.dtype, np.number):
+        if is_numeric_dtype(s1) and is_numeric_dtype(s2):
             if not np.allclose(s1, s2, rtol=precision, atol=precision, equal_nan=True):
                 diff = np.nanmax(np.abs(s1 - s2))
                 cwarn(f"CSV numeric column '{col}' differs")
@@ -303,14 +309,14 @@ def run_tests(category):
         if os.path.exists(dir_test):
             shutil.rmtree(dir_test)
         if 'gecsx' in test:
-            with suppress_external_stdout():
+            with ctx():
                 main_gecsx(test, gather_plots=False)
         else:
             t0 = time_ref[time_ref['test_name'] == test_bname]['t0']
             t1 = time_ref[time_ref['test_name'] == test_bname]['t1']
             starttime = datetime.datetime.strptime(str(int(t0.iloc[0])), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
             endtime = datetime.datetime.strptime(str(int(t1.iloc[0])), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
-            with suppress_external_stdout():
+            with ctx():
                 cprint("Starting test ")
                 main(test, starttime=starttime, endtime=endtime)            
             
@@ -338,3 +344,6 @@ def test_base():
 def test_mch():
     run_tests('mch')
 
+if __name__ == "__main__":
+    test_name = sys.argv[1]
+    run_tests(test_name)
