@@ -35,7 +35,7 @@ from contextlib import contextmanager
 def running_under_pytest() -> bool:
     return ("PYTEST_CURRENT_TEST" in os.environ) or ("pytest" in sys.modules)
 
-#contextmanager
+@contextmanager
 def suppress_external_stdout():
     original_print = builtins.print
 
@@ -53,7 +53,7 @@ def suppress_external_stdout():
     finally:
         builtins.print = original_print
 
-ctx = suppress_external_stdout() if running_under_pytest() else nullcontext
+mycontext = suppress_external_stdout if running_under_pytest() else nullcontext
 
 def safe_to_numeric(df):
     for col in df.columns:
@@ -309,14 +309,14 @@ def run_tests(category):
         if os.path.exists(dir_test):
             shutil.rmtree(dir_test)
         if 'gecsx' in test:
-            with ctx():
+            with mycontext():
                 main_gecsx(test, gather_plots=False)
         else:
             t0 = time_ref[time_ref['test_name'] == test_bname]['t0']
             t1 = time_ref[time_ref['test_name'] == test_bname]['t1']
             starttime = datetime.datetime.strptime(str(int(t0.iloc[0])), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
             endtime = datetime.datetime.strptime(str(int(t1.iloc[0])), '%Y%m%d%H%M%S').replace(tzinfo=datetime.timezone.utc)
-            with ctx():
+            with mycontext():
                 cprint("Starting test ")
                 main(test, starttime=starttime, endtime=endtime)            
             
