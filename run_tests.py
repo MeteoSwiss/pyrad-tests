@@ -339,11 +339,17 @@ def run_tests(category):
             assert are_identical
 
 def test_base():
+    os.environ["PYART_CONFIG"]=os.path.join(os.environ["PYRAD_TESTS_PATH"], "config", "pyart", "arm_config.py")
     run_tests('base')
 
 def test_mch():
+    os.environ["PYART_CONFIG"]=os.path.join(os.environ["PYRAD_TESTS_PATH"], "config", "pyart", "mch_config.py")
     run_tests('mch')
 
+# For direct testing without pytest
 if __name__ == "__main__":
     test_name = sys.argv[1]
-    run_tests(test_name)
+    if test_name == "base":
+        test_base()
+    elif test_name == "mch":
+        test_mch()
