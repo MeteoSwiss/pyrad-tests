@@ -3,11 +3,11 @@ path_convention: ODIM
 saveimgbasepath: ${PYRAD_TESTS_PATH}/pyrad_products_test/
 imgformat:
 - png
-s3EndpointRead: https://eu-central-1.linodeobjects.com/
-s3BucketRead: pyrad-s3-tests
+s3EndpointRead: https://s3.pub1.infomaniak.cloud
+s3BucketRead: pyrad-ci
 s3PathRead: Cband
-s3EndpointWrite: https://eu-central-1.linodeobjects.com/
-s3BucketWrite: pyrad-s3-tests
+s3EndpointWrite: https://s3.pub1.infomaniak.cloud
+s3BucketWrite: pyrad-ci
 s3PathWrite: Output
 configpath: ${PYRAD_TESTS_PATH}/config/
 locationConfigFile: ${PYRAD_TESTS_PATH}/config/processing/base/read_write_s3_loc.yaml

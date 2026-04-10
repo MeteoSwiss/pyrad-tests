@@ -2,8 +2,8 @@ name: read_display_rainbow
 datapath: ${PYRAD_TESTS_PATH}/input_data/read_display_rainbow/
 loadbasepath: ${PYRAD_TESTS_PATH}/pyrad_products_test/
 loadname: read_display_rainbow
-s3EndpointWrite: https://eu-central-1.linodeobjects.com/
-s3BucketWrite: pyrad-s3-tests
+s3EndpointWrite: https://s3.pub1.infomaniak.cloud
+s3BucketWrite: pyrad-ci
 s3PathWrite: Output
 saveimgbasepath: ${PYRAD_TESTS_PATH}/pyrad_products_test/
 imgformat:

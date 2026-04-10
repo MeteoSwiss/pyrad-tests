@@ -1,0 +1,21 @@
+# Weather radar/sensor comparison timeseries data file
+# Comment lines are preceded by "#"
+# Description: 
+# Time series of radar and sensor data over a fixed location.
+# Location: Radar (az, el, r): (102.2, 0.1, 4453.0)
+# RG: MER
+# Time aggregation period (s): None
+# Time aggregation method: mean
+# Sensor/Radar timestamp alignment method: nearest
+# Sensor/Radar timestamp alignment tolerance (s): None
+# Data: Radar estimated rain rate (mm/h)
+# Fill Value: -9999.0
+# Start: 2025-04-17 00:02:12 UTC
+#
+date,sensor,radar_radar001
+2025-04-17 00:00:00+00:00,2.4000000000000004,1.0268519801578384
+2025-04-17 00:10:00+00:00,2.4000000000000004,0.7222837512488456
+2025-04-17 00:20:00+00:00,4.800000000000001,0.7222837512488456
+2025-04-17 00:30:00+00:00,4.199999999999999,1.0268519801578384
+2025-04-17 00:40:00+00:00,4.800000000000001,0.8314341238677828
+2025-04-17 00:50:00+00:00,3.5999999999999996,0.8314341238677828

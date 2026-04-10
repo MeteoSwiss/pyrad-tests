@@ -1,0 +1,14 @@
+# Weather radar validation scores with sensors data file
+# Comment lines are preceded by "#"
+# Description: 
+# Time series of sensor intercomparison scores.
+# Scores: NP, RMSE, corr.
+# Bounds: all.
+# Radars: RADAR001.
+# Double conditional threshold: -inf.
+# Data: Radar estimated rain rate (mm/h)
+# Fill Value: -9999.0
+# Start: 2025-04-17 00:47:14 UTC
+#
+date,NP_radar001,RMSE_radar001,corr_radar001
+20250417004714,4,3.010279499317199,-0.6255604690703622

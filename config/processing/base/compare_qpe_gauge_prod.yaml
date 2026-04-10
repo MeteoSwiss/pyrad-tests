@@ -21,25 +21,29 @@ rgBRZ_RR:
   EleTol: 5.0
   RngTol: 300.0
   products:
-    RR:
-      type: PLOT_AND_WRITE_POINT
-    RRcomp:
-      type: COMPARE_POINT
-      prdid: RR
+    ts:
+      type: POINT_TS
+      do_only_final: True
+    scores:
+      type: COMPARE_SCORES_SENSOR
+      varname: "Precipitation:mm"
       sensor: rgage
       sensorid: BRZ
-    RRcumcomp:
-      type: COMPARE_CUMULATIVE_POINT
-      prdid: RR
+      sensor_scaling: 6
+      dir_template: "{%Y-%m-%d}/{sensorid}/"
+    sensor:
+      type: COMPARE_POINT_SENSOR
+      varname: "Precipitation:mm"
+      do_only_final: True
       sensor: rgage
       sensorid: BRZ
-    RRcum3600s:
-      type: COMPARE_TIME_AVG
-      prdid: RR
-      sensor: rgage
-      sensorid: BRZ
-      cum_time: 3600
-      base_time: 0
+      sensor_scaling: 6
+      dir_template: "{%Y-%m-%d}/{sensorid}/"
+      scores:
+        - logBias
+        - RMSE
+        - scatter
+
 rgMER_RR:
   type: POINT_MEASUREMENT
   datatype:
@@ -53,22 +57,25 @@ rgMER_RR:
   EleTol: 5.0
   RngTol: 300.0
   products:
-    RR:
-      type: PLOT_AND_WRITE_POINT
-    RRcomp:
-      type: COMPARE_POINT
-      prdid: RR
+    ts:
+      type: POINT_TS
+      do_only_final: True
+    scores:
+      type: COMPARE_SCORES_SENSOR
+      varname: "Precipitation:mm"
       sensor: rgage
       sensorid: MER
-    RRcumcomp:
-      type: COMPARE_CUMULATIVE_POINT
-      prdid: RR
+      sensor_scaling: 6
+      dir_template: "{%Y-%m-%d}/{sensorid}/"
+    sensor:
+      type: COMPARE_POINT_SENSOR
+      varname: "Precipitation:mm"
+      do_only_final: True
       sensor: rgage
       sensorid: MER
-    RRcum3600s:
-      type: COMPARE_TIME_AVG
-      prdid: RR
-      sensor: rgage
-      sensorid: MER
-      cum_time: 3600
-      base_time: 0
+      sensor_scaling: 6
+      dir_template: "{%Y-%m-%d}/{sensorid}/"
+      scores:
+        - logBias
+        - RMSE
+        - scatter
