@@ -6,10 +6,9 @@ txpwrh: 35000.0
 AntennaGainH: 42.2
 mflossh: 1.0
 lrxh: 2.6
-RadarPosition:
-  latitude: 47.49642
-  longitude: 8.64704
-  altitude: 646.0
+latitude: 47.49642
+longitude: 8.64704
+altitude: 646.0
 attg: 0.012
 AzimTol: 0.0
 mosotti_factor: 0.9644
